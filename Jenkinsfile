@@ -1,19 +1,23 @@
 pipeline{
 	agent any
-   scannerHome = tool 'sonar-scanner';
-	stages{
-	  stage('Checkout'){
+	  tools {
+	    sonarScanner 'sonar-scanner'
+            dpc 'dp'
+	  }
+ stages{
+   stage('Checkout'){
 	    steps{
 		echo 'Hello World'
       }
+   }
+   stage('SonarQube Analysis') {
+      steps {
+        withSonarQubeEnv('sonar-server') {
+          sh "${tool 'sonar-scanner'}/bin/sonar-scanner"
+        }
+      }
     }
-    stage('SonarQube Analysis') {
-    
-    withSonarQubeEnv('sonar-server') {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
-	stage('Dependency Check'){
+     stage('Dependency Check'){
             steps{
                 echo 'Hello World'
       }
