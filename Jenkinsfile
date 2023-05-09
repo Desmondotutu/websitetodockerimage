@@ -1,28 +1,27 @@
-pipeline{
-	agent any
-	  tools {
-	    sonarScanner 'SonarScanner'
-            dependency-check 'Dependency-Check'
-	  }
- stages{
-   stage('Checkout'){
-	    steps{
-		echo 'Hello World'
-      }
-   }
-   stage('SonarQube Analysis') {
-      steps {
-        withSonarQubeEnv('SonarServer') {
-          sh "${tool 'SonarScanner'}/bin/sonar-scanner"
+pipeline {
+    agent any
+    tools {
+        sonarScanner 'SonarScanner'
+        dependencyCheck 'Dependency-Check'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git
+            }
         }
-      }
-    }
-     stage('Dependency Check'){
-            steps{
+        stage('Dependency Test') {
+            steps {
                 sh "${tool('Dependency-Check')}/bin/dependency-check.sh --scan . --format HTML --project 'WebsiteToDockerImage' --out dependency-check-report.html"
-      }
+            }
+        }
+        stage('Security Scan') {
+            steps {
+                withSonarQubeEnv('SonarServer') {
+                    sh "${tool('SonarScanner')}/bin/sonar-scanner"
+                }
+            }
+        }
     }
-
-  }
-
 }
+
