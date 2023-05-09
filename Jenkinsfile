@@ -2,7 +2,7 @@ pipeline{
 	agent any
 	  tools {
 	    sonarScanner 'sonar-scanner'
-            dpc 'dp'
+            dependency-check 'dp'
 	  }
  stages{
    stage('Checkout'){
@@ -19,7 +19,7 @@ pipeline{
     }
      stage('Dependency Check'){
             steps{
-                echo 'Hello World'
+                sh "${tool 'dp'}/bin/dp"
       }
     }
 
