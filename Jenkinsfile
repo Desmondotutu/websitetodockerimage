@@ -1,8 +1,8 @@
 pipeline{
 	agent any
 	  tools {
-	    sonarScanner 'SonarScanner';
-            dependencyCheck 'Dependency-Check'
+	    sonarScanner 'SonarScanner'
+            dependency-check 'Dependency-Check'
 	  }
  stages{
    stage('Checkout'){
