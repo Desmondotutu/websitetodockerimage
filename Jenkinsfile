@@ -1,8 +1,8 @@
 pipeline{
 	agent any
 	  tools {
-	    sonarScanner 'sonar-scanner';
-            dependency-check 'dp'
+	    SonarScanner 'sonar-scanner';
+            Dependency-Check 'dependency-check'
 	  }
  stages{
    stage('Checkout'){
@@ -19,7 +19,7 @@ pipeline{
     }
      stage('Dependency Check'){
             steps{
-                sh "${tool 'dp'}/bin/dp"
+                sh "${tool('dependency-check')}/bin/dependency-check.sh --scan . --format HTML --project 'MyProject' --out dependency-check-report.html"
       }
     }
 
