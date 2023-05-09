@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	  tools {
-	    sonarScanner 'sonar-scanner'
+	    sonarScanner 'sonar-scanner';
             dependency-check 'dp'
 	  }
  stages{
