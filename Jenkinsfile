@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git
+                git 'https://github.com/Desmondotutu/websitetodockerimage.git'
             }
         }
         stage('Dependency Test') {
