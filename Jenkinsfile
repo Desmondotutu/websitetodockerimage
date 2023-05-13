@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
-        sonarScanner 'SonarScanner'
-        dependencyCheck 'Dependency-Check'
+    environment {
+        sonarScanner = tool 'SonarScanner'
+        DependencyCheck = tool 'dependencyCheck'
     }
     stages {
         stage('Checkout') {
@@ -12,13 +12,13 @@ pipeline {
         }
         stage('Dependency Test') {
             steps {
-                sh "${tool('Dependency-Check')}/bin/dependency-check.sh --scan . --format HTML --project 'WebsiteToDockerImage' --out dependency-check-report.html"
+                sh "${DependencyCheck}/bin/dependency-check.sh --scan . --format HTML --project 'WebsiteToDockerImage' --out dependency-check-report.html"
             }
         }
         stage('Security Scan') {
             steps {
-                withSonarQubeEnv('SonarServer') {
-                    sh "${tool('SonarScanner')}/bin/sonar-scanner"
+                withSonarQubeEnv('sonarServer') {
+                    sh "${SonarScanner}/bin/sonar-scanner"
                 }
             }
         }
