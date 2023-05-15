@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Desmondotutu/websitetodockerimage.git'
+                git branch: 'main', url: 'https://github.com/Desmondotutu/websitetodockerimage.git'
             }
         }
         stage('Dependency Test') {
