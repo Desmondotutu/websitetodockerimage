@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        sonarHome = tool 'SonarScanner'
+        sonarHome = tool 'SonarQubeScanner'
         DependencyCheck = tool 'DP-Check'
     }
     stages {
@@ -18,7 +18,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 withSonarQubeEnv('sonarServer') {
-                    sh "${sonarHome}/bin/sonar-scanner -Dsonar.projectKey=tester-project"
+                    sh "${sonarHome}/bin/sonar-scanner -Dsonar.projectKey=webtoimage"
                 }
             }
         }
