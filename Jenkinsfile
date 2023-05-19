@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Security Scan') {
             steps {
-                withSonarQubeEnv('sonarServer') {
+                withSonarQubeEnv('SonarServerAWS') {
                     sh "${sonarHome}/bin/sonar-scanner -Dsonar.projectKey=webtoimage"
                 }
             }
