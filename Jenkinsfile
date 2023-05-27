@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Security Scan') {
             steps {
-                withSonarQubeEnv('sonarServer9.9') {
+                withSonarQubeEnv() {
                     sh "${sonarHome}/bin/sonar-scanner"
                 }
             }
