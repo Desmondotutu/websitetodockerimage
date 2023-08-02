@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        sonarHome = tool 'SonarQubeScanner4.8'
+        sonarHome = tool 'SonarQubeScanner5.0'
         DependencyCheck = tool 'DP-Check'
     }
     stages {
