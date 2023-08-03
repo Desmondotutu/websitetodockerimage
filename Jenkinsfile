@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        sonarHome = tool 'SonarQubeScanner5.0'
+        scannerHome = tool 'SonarQubeScanner5.0'
         DependencyCheck = tool 'DP-Check'
     }
     stages {
@@ -17,8 +17,8 @@ pipeline {
         }
       stage('Security Scan') {
             steps {
-                withSonarQubeEnv() {
-                    sh "${sonarHome}/bin/sonar-scanner"
+                withSonarQubeEnv('SonarqubeServer10') {
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
