@@ -18,7 +18,7 @@ pipeline {
       stage('Security Scan') {
             steps {
                 withSonarQubeEnv("SonarqubeServer10") {
-                    sh "${sonarHome}/bin/sonar-scanner -Dsonar.projectKey=testing -Dsonar.sources=."
+                    sh "${sonarHome}/bin/sonar-scanner"
                 }
             }
         }
