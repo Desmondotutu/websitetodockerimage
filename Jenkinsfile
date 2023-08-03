@@ -1,3 +1,4 @@
+/*
 pipeline {
     agent any
     environment {
@@ -23,5 +24,16 @@ pipeline {
             }
         }
     }
+} */
+node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarQubeScanner5.0';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
+    }
+  }
 }
 
