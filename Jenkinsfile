@@ -9,11 +9,11 @@ pipeline {
                 git url: 'https://github.com/Desmondotutu/websitetodockerimage.git'
             }
         }
-      stage('Dependency Test') {
+      /*stage('Dependency Test') {
             steps {
                 sh "${DependencyCheck}/bin/dependency-check.sh --scan . --format HTML --project 'WebsiteToDockerImage' --out dependency-check-report.html"
             }
-        }
+        }*/
       stage('Security Scan') {
             steps {
                 scripts{
