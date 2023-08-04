@@ -17,8 +17,10 @@ pipeline {
         }
       stage('Security Scan') {
             steps {
+                script{
                 withSonarQubeEnv(credentialsId: 'sonar-secret') {
                     sh "${scannerHome}/bin/sonar-scanner"
+                }
                 }
             }
         }
