@@ -1,4 +1,3 @@
-/*
 pipeline {
     agent any
     environment {
@@ -8,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Desmondotutu/websitetodockerimage.git'
+                git url: 'https://github.com/Desmondotutu/websitetodockerimage.git'
             }
         }
       stage('Dependency Test') {
@@ -24,16 +23,4 @@ pipeline {
             }
         }
     }
-} */
-node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarQubeScanner5.0';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
 }
-
