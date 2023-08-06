@@ -5,17 +5,13 @@ pipeline {
         DependencyCheck = tool 'DP-Check'
     }
     stages {
-        stage('Checkout') {
-            steps {
-                git url: 'https://github.com/Desmondotutu/websitetodockerimage.git'
-            }
-        }
+
       stage('Dependency Test') {
             steps {
                 sh "${DependencyCheck}/bin/dependency-check.sh --scan . --out dependency-check-report.html"
             }
         }
-      stage('Security Scan') {
+      stage('Static Code Analysis') {
             steps {
                 scripts{
                 withSonarQubeEnv('SonarqubeServer10'){
