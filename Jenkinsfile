@@ -12,13 +12,13 @@ pipeline {
         }
       stage('Dependency Test') {
             steps {
-                sh "${DependencyCheck}/bin/dependency-check.sh --scan . --format HTML --project 'WebsiteToDockerImage' --out dependency-check-report.html"
+                sh "${DependencyCheck}/bin/dependency-check.sh --scan . --out dependency-check-report.html"
             }
         }
       stage('Security Scan') {
             steps {
                 scripts{
-                withSonarQubeEnv(credentialsId: 'sonar-secret', installationName: 'SonarqubeServer10'){
+                withSonarQubeEnv('SonarqubeServer10'){
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
                 }
