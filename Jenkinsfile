@@ -20,5 +20,25 @@ pipeline {
                 }
             }
         }
+        stage('Docker Build') {
+            steps {
+                sh "docker build -t desmondo1/webapp:latest ."
+            }
+        }
+
+        stage('trivy') {
+            steps {
+                sh "trivy image desmondo1/webapp:latest"
+            }
+        }
+         stage('Push image to Hub'){
+            steps{
+                script{
+                  withDockerRegistry(credentialsId: 'dockerHubCredentials'){
+                   sh 'docker push desmondo1/webapp:latest'
+                    }
+                }
+            }
+        }
     }
 }
