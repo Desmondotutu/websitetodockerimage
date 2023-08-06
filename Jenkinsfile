@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         scannerHome = tool 'SonarQubeScanner5.0'
+        DependencyCheck = tool 'DP-Check'
     }
     stages {
         stage('Checkout') {
