@@ -5,13 +5,6 @@ pipeline {
         DependencyCheck = tool 'DP-Check'
     }
     stages {
-        stage("Cleanup Workspace"){
-            steps {
-                cleanWs()
-            }
-
-        }
-
       stage('Dependency Test') {
             steps {
                 sh "${DependencyCheck}/bin/dependency-check.sh --scan . --out dependency-check-report.html"
