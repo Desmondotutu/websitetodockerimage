@@ -17,6 +17,11 @@ pipeline {
                 }
             }
         }
+         stage('Quality Gate') {
+            steps {
+                waitForQualityGate abortPipeline: true, credentialsId: 'sonar'
+            }
+        }
         stage('Docker Build Image') {
             steps {
                 sh "docker build -t desmondo1/webapp:latest ."
