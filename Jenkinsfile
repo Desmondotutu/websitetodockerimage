@@ -13,10 +13,8 @@ pipeline {
         }
       stage('Static Code Analysis') {
             steps {
-                scripts{
                 withSonarQubeEnv('SonarqubeServer10'){
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testing"
                 }
             }
         }
