@@ -5,6 +5,12 @@ pipeline {
         DependencyCheck = tool 'DP-Check'
     }
     stages {
+        stage("Cleanup Workspace"){
+            steps {
+                cleanWs()
+            }
+
+        }
 
       stage('Dependency Test') {
             steps {
