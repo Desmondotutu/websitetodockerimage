@@ -5,30 +5,30 @@ pipeline {
         DependencyCheck = tool 'DP-Check'
     }
     stages {
-      stage('Dependency Test') {
+      stage('OWASP Dependency Test') {
             steps {
                 sh "${DependencyCheck}/bin/dependency-check.sh --scan . --out dependency-check-report.html"
             }
         }
-      stage('Static Code Analysis') {
+      stage('Sonarqube Static Code Analysis') {
             steps {
                 withSonarQubeEnv('SonarqubeServer10'){
                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testing"
                 }
             }
         }
-        stage('Docker Build') {
+        stage('Docker Build Image') {
             steps {
                 sh "docker build -t desmondo1/webapp:latest ."
             }
         }
 
-        stage('trivy') {
+        stage('Trivy Docker Image Scan') {
             steps {
                 sh "trivy image desmondo1/webapp:latest"
             }
         }
-         stage('Push image to Hub'){
+         stage('Push Image to DockerHub'){
             steps{
                 script{
                   withDockerRegistry(credentialsId: 'dockerHubCredentials'){
