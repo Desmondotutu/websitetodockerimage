@@ -8,7 +8,7 @@ LABEL maintainer="Desmondo desmondotutu93@gmail.com"
 WORKDIR /usr/share/nginx/html
 
 # Copy your website files to the working directory
-COPY ./src/* /usr/share/nginx/html
+COPY ./src/* /usr/share/nginx/html/
 
 # Expose port 80 for HTTP traffic
 EXPOSE 80
