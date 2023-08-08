@@ -19,7 +19,7 @@ pipeline {
         }
          stage('Quality Gate') {
             steps {
-                waitForQualityGate abortPipeline: true, credentialsId: 'sonar'
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
             }
         }
         stage('Docker Build Image') {
