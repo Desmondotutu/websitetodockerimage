@@ -17,34 +17,13 @@ pipeline {
                 }
             }
         }
-        /* stage('Quality Gate') {
-            steps {
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
-            }
-        } */
         stage('Quality Gate') {
             steps {
                 script {
-                    def qualityGateUrl = "https://4b22a52cd41c.mylabserver.com/" // Replace with your SonarQube server URL
-                    def webhookData = webhook(
-                        url: "${qualityGateUrl}/api/webhooks/list",
-                        contentType: 'APPLICATION_JSON',
-                        method: 'GET'
-                    )
-                    def webhookId = webhookData.find { it.name == 'jenkins-webhook' }?.id // Replace with your webhook's name
-
-                    def qualityGateStatus = webhook(
-                        url: "${qualityGateUrl}/api/webhooks/${webhookId}/deliveries/latest",
-                        contentType: 'APPLICATION_JSON',
-                        method: 'GET'
-                    ).qualityGate.status
-
-                    if (qualityGateStatus == 'ERROR') {
-                        error("Quality Gate failed")
-                    }
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar'
                 }
             }
-        }
+        } 
         stage('Docker Build Image') {
             steps {
                 sh "docker build -t desmondo1/webapp:latest ."
