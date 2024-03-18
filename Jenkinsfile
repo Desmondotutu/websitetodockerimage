@@ -27,7 +27,7 @@ pipeline {
         stage('Docker Build Image') {
             steps {
                 sh "docker build -t desmondo1/webapp:latest ."
-                sh "Hello, building a docker image of my app"
+               // sh "Hello, building a docker image of my app"
             }
         }
 
