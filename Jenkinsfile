@@ -10,6 +10,18 @@ pipeline {
                 sh "${DependencyCheck}/bin/dependency-check.sh --scan . --out dependency-check-report.html"
             }
         }
+     stage('Publish OWASP Dependency Check Report') {
+            steps {
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: '.',
+                    reportFiles: 'dependency-check-report.html',
+                    reportName: 'OWASP Dependency Check Report'
+                ])
+            }
+        }
       stage('Sonarqube Static Code Analysis') {
             steps {
                 withSonarQubeEnv('SonarqubeServer10'){
