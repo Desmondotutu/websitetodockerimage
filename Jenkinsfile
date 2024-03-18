@@ -38,7 +38,7 @@ pipeline {
          stage('Push Image to DockerHub'){
             steps{
                 script{
-                  withDockerRegistry(credentialsId: 'dockerHubCredentials'){
+                  withDockerRegistry(credentialsId: 'dockerhub-creds'){
                    sh 'docker push desmondo1/webapp:latest'
                     }
                 }
